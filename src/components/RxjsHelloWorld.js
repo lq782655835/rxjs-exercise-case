@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {
     of, from, fromEvent,range,interval,
     Observable, Subject } from 'rxjs';
-import { map, filter } from "rxjs/operators";
+import { map, filter, switchMap } from "rxjs/operators";
 
 let helloworld = of(1, 2, 3)
 helloworld.subscribe((val) => console.log(val, 'helloworld'))
