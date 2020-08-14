@@ -21,6 +21,20 @@ range(1, 10)
 //     )
 //     .subscribe(x => console.log(x))
 
+// rxjs非常适合场景：按顺序轮训table的每条row记录，同时可做到顺序固定 + 可过滤已完成状态
+interval(1000)
+    .pipe(
+        map(increase => increase * 10),
+        filter(val => val < 100),
+        switchMap(val => from(ajax(val)))
+    )
+    .subscribe(x => console.log(x))
+
+function ajax(val) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(val + 1), 500)
+    })
+}
 
 // Observable.create静态方法 等同于 new Observable
 Observable.create(observer => observer.next(1)).subscribe(val => console.log(val, 'Observable.create'))
